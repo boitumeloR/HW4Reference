@@ -1,0 +1,201 @@
+﻿@model HW4Reference.ViewModels.ShapeViewModel
+@{
+    ViewBag.Title = "AddShape";
+}
+<h2>Add Shape</h2>
+
+@using (Html.BeginForm("AddShape", "Home", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(m => m.Shape.Description)
+        <div>
+            @Html.TextAreaFor(m => m.Shape.Description, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Shape.Fill)
+        <div>
+            @Html.DropDownListFor(m => m.Shape.Fill, new SelectList(
+            new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Yellow", Value = "#f2f542"},
+                new SelectListItem {Text = "Red", Value = "#f54242"},
+                new SelectListItem {Text = "Blue", Value = "#00f7ff"},
+            }, "Value", "Text", 1
+           ), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Shape.StrokeColor)
+        <div>
+            @Html.DropDownListFor(m => m.Shape.StrokeColor, new SelectList(
+            new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Black", Value = "#000000"},
+                new SelectListItem {Text = "Pink", Value = "#ff00d0"},
+                new SelectListItem {Text = "Blue", Value = "#00f7ff"},
+            }, "Value", "Text", 1
+            ), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Shape.StrokeWidth)
+        <div>
+            @Html.TextBoxFor(m => m.Shape.StrokeWidth, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div>
+
+        <div>
+            <label>
+                Choose Shape
+            </label>
+            <div>
+                @Html.DropDownListFor(m => m.CurrentShape, new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Choose Shape", Value = ""},
+                    new SelectListItem {Text = "Rectangle", Value = "rectangle"},
+                    new SelectListItem {Text = "Triangle", Value = "triangle"},
+                    new SelectListItem {Text = "Circle", Value = "circle"},
+                }, "Value", "Text", 1
+                ), new { @class = "form-control", @onchange = "changeInitial(this)" })
+            </div>
+        </div>
+    </div>
+
+    <div id="parent">
+
+    </div>
+}
+
+
+<script>
+
+    function changeInitial(select) {
+        const t = document.getElementById('parent');
+        if (select.value === 'rectangle') {
+            t.innerHTML = `
+             <div>
+                @Html.LabelFor(m => m.Rectangle.X)
+                <div>
+                    @Html.TextBoxFor(x => x.Rectangle.X, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Rectangle.Y)
+                <div>
+                    @Html.TextBoxFor(x => x.Rectangle.Y, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div>
+
+
+
+
+                @Html.LabelFor(m => m.Rectangle.Width)
+                <div>
+                    @Html.TextBoxFor(x => x.Rectangle.Width, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Rectangle.Height)
+                <div>
+                    @Html.TextBoxFor(x => x.Rectangle.Height, new { @class = "form-control" })
+                </div>
+            </div>
+            <input type="submit" class="btn btn-success" value="Add Shape" />
+            `
+        } else if (select.value === 'triangle') {
+            t.innerHTML = `
+        <div>
+            @Html.LabelFor(m => m.Triangle.X)
+            <div>
+                @Html.TextBoxFor(x => x.Triangle.X, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Triangle.Y)
+            <div>
+                @Html.TextBoxFor(x => x.Triangle.Y, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Triangle.RightX)
+            <div>
+                @Html.TextBoxFor(m => m.Triangle.RightX, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Triangle.RightY)
+            <div>
+                @Html.TextBoxFor(m => m.Triangle.RightY, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Triangle.LeftX)
+            <div>
+                @Html.TextBoxFor(m => m.Triangle.LeftX, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Triangle.LeftY)
+            <div>
+                @Html.TextBoxFor(m => m.Triangle.LeftY, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Triangle.TopX)
+            <div>
+                @Html.TextBoxFor(m => m.Triangle.TopX, new { @class = "form-control" })
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Triangle.TopY)
+            <div>
+                @Html.TextBoxFor(m => m.Triangle.TopY, new { @class = "form-control" })
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value="Add Shape" />
+        `
+        } else if (select.value === 'circle') {
+            t.innerHTML = `
+            <div>
+                @Html.LabelFor(m => m.Circle.X)
+                <div>
+                    @Html.TextBoxFor(m => m.Circle.X, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Circle.Y)
+                <div>
+                    @Html.TextBoxFor(m => m.Circle.Y, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div>
+                @Html.LabelFor(m => m.Circle.Radius)
+                <div>
+                    @Html.TextBoxFor(m => m.Circle.Radius, new { @class = "form-control" })
+                </div>
+            </div>
+            <input type="submit" class="btn btn-success" value="Add Shape" />
+            `
+        }
+    }
+</script>
+

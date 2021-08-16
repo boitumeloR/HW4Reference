@@ -1,0 +1,28 @@
+﻿@model List<HW4Reference.Models.Shape>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Shapes HW4</h1>
+</div>
+
+<div>
+    <a class="btn btn-info" href='@Url.Action("AddShape", "Home")'>Add Shape</a>
+</div>
+<div>
+    @if (Model != null)
+    {
+        foreach (var shape in Model)
+        {
+            <div>
+                <h2>@shape.Description</h2>
+                <p>@shape.getArea()</p>
+                <div>
+                    @Html.Raw(shape.getSvg())
+                </div>
+            </div>
+        }
+    }
+</div>
+
